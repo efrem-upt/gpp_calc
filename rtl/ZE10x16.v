@@ -1,4 +1,4 @@
-module SE10x16(
+module ZE10x16(
   input [9:0] in,
   output reg [15:0] out
 );
