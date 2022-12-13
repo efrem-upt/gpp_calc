@@ -10,11 +10,15 @@ class OneArgument(Instruction):
         "BRA": "001010"
     }
 
+    labels = {
+
+    }
+
     def __init__(self, arg_list):
         super().__init__(arg_list[0])
-        self.arg1 = int(arg_list[1])
+        self.arg1 = arg_list[1]
 
     def assemble(self):
         result = OneArgument.op_codes[self.instruction]
-        result = result + '{0:010b}'.format(self.arg1)
+        result = result + '{0:010b}'.format(int(OneArgument.labels[self.arg1]))
         return result

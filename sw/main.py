@@ -1,167 +1,19 @@
 from tkinter import *
 import re
-
-from tkinter import filedialog,Tk
+from tkinter import filedialog, Tk
 import os.path
-
-import sys
-
-filename = "Untitled"
-fileexists = False
-
-
-def asmtoint2(asm):
-    asm_split = re.split(" |, |\(|\)", asm)
-    args = []
-    for i in range(len(asm_split)):
-        if (asm_split[i] != ""):
-            args.append(asm_split[i])
-    print (args)
-    opcode = 0
-    func = 0
-    rd = 0
-    rs = 0
-    rt = 0
-    imm = 0
-    if (args[0] == "sll"):
-        if (len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 0
-        func = 0
-        rd = int(args[1][1:])
-        rs = int(args[2][1:])
-        rt = int(args[3][1:])
-    elif (args[0] == "add"):
-        if (len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 0
-        func = 1
-        rd = int(args[1][1:])
-        rs = int(args[2][1:])
-        rt = int(args[3][1:])
-    elif (args[0] == "sub"):
-        if (len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 0
-        func = 2
-        rd = int(args[1][1:])
-        rs = int(args[2][1:])
-        rt = int(args[3][1:])
-    elif (args[0] == "nand"):
-        if (len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 0
-        func = 3
-        rd = int(args[1][1:])
-        rs = int(args[2][1:])
-        rt = int(args[3][1:])
-    elif (args[0] == "nor"):
-        if (len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 0
-        func = 4
-        rd = int(args[1][1:])
-        rs = int(args[2][1:])
-        rt = int(args[3][1:])
-    elif (args[0] == "bez"):
-        if (len(args) != 3):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 1
-        rt = 0
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bnez"):
-        if (len(args) != 3):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 1
-        rt = 1
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bgez"):
-        if (len(args) != 3):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 1
-        rt = 2
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "blez"):
-        if (len(args) != 3):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 1
-        rt = 3
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bgz"):
-        if (len(args) != 3):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 1
-        rt = 4
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "blz"):
-        if (len(args) != 3):
-            return 0
-        opcode = 1
-        rt = 5
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "lw"):
-        if (args[-1] == ''):
-            args = args[0:-1]
-        if (len(args) != 3 and len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 2
-        rt = int(args[1][1:])
-        if (len(args) == 3):
-            imm = 0
-            rs = int(args[2][1:])
-        else:
-            imm = int(args[2])
-            rs = int(args[3][1:])
-    elif (args[0] == "sw"):
-        if (args[-1] == ''):
-            args = args[0:-1]
-        if (len(args) != 3 and len(args) != 4):
-            return 0, 0, 0, 0, 0, 0
-        opcode = 3
-        rt = int(args[1][1:])
-        if (len(args) == 3):
-            imm = 0
-            rs = int(args[2][1:])
-        else:
-            imm = int(args[2])
-            rs = int(args[3][1:])
-    else:
-        return 0, 0, 0, 0, 0, 0
-    return opcode, rs, rt, rd, func, imm
-
-
-def inttohex(opcode, rs, rt, rd, func, imm):
-    if (opcode == 0):
-        opstr = format(opcode, '02b')
-        rsstr = format(rs, '03b')
-        rtstr = format(rt, '03b')
-        rdstr = format(rd, '03b')
-        fnstr = format(func, '05b')
-        # print (opstr, rsstr, rtstr, rdstr, fnstr)
-        instruction = opstr + rsstr + rtstr + rdstr + fnstr
-    else:
-        opstr = format(opcode, '02b')
-        rtstr = format(rt, '03b')
-        rsstr = format(rs, '03b')
-        if (imm < 0):
-            imm2s = ((-imm) ^ 255) + 1
-            immstr = format(imm2s, '08b')
-        else:
-            immstr = format(imm, '08b')
-        # print opstr, rtstr, rsstr, immstr
-        instruction = opstr + rsstr + rtstr + immstr
-    return format(int(instruction, 2), '04x')
 from noArg import NoArgument
 from arithmOneArg import ArithmeticOneArgument
 from twoArg import TwoArguments
 from stackInstr import StackInstruction
 from oneArg import OneArgument
+
+import sys
+
+filename = "test"
+fileexists = False
+label = 0
+program = []
 
 classes = {
     1: NoArgument,
@@ -170,13 +22,7 @@ classes = {
 }
 
 
-def asmtoint(asm):
-    asm_split = re.split(" |, |\(|\)", asm)
-    args = []
-    for i in range(len(asm_split)):
-        if asm_split[i] != "":
-            args.append(asm_split[i])
-    #print(args)
+def asmtoint(args):
     if args[0] in StackInstruction.op_codes:
         instr = StackInstruction(args)
     elif args[0] in OneArgument.op_codes:
@@ -187,8 +33,6 @@ def asmtoint(asm):
 
 
 def decode(asm):
-    #opcode, rs, rt, rd, func, imm = asmtoint(asm)
-    #instruction = inttohex(opcode, rs, rt, rd, func, imm)
     try:
         instruction = asmtoint(asm)
         return str(instruction)
@@ -245,18 +89,44 @@ def exitApp():
     sys.exit()
 
 
+def get_instruction_list(asm):
+    asm_split = re.split(" |, |\(|\)|:", asm)
+    args = []
+    global label
+    for i in range(len(asm_split)):
+        if asm_split[i] != "":
+            args.append(asm_split[i])
+    if args[0] not in NoArgument.op_codes and args[0] not in OneArgument.op_codes and args[
+        0] not in TwoArguments.op_codes and args[0] not in StackInstruction.op_codes and args[0] not in ['RET', 'JMP']:
+        OneArgument.labels[args[0]] = label
+        args = args[1:]
+    if args[0] == 'RET':
+        args = ['POP', 'PC']
+    if args[0] == 'JMP':
+        label = label + 2
+        program.append(['PSH', 'PC'])
+        program.append(['BRA', args[1]])
+    else:
+        label = label + 1
+        program.append(args)
+
+
 def compileASM():
     global filename
+    global label
+    global program
+    label = 0
     cpu_out = ""
+    program = []
     asm_in = textArea.get("1.0", END)
     asmlines = re.split("\n", asm_in)
     for i in range(len(asmlines)):
         if (asmlines[i] != ""):
-            #print(asmlines[i])
-            cpu_out += decode(asmlines[i]) + "\n"
-    # print cpu_out
+            asmlines[i] = asmlines[i].upper()
+            get_instruction_list(asmlines[i])
+    for i in program:
+        cpu_out += decode(i) + "\n"
     name, ext = os.path.splitext(filename)
-    print(ext)
     hexfilename = name + ".fic"
     hexfile = open(hexfilename, "w")
     hexfile.seek(0)
@@ -290,16 +160,3 @@ frame.config(menu=menubar)
 frame.minsize(750, 450)
 frame.maxsize(750, 450)
 frame.mainloop()
-
-# Sample counting loop code
-"""
-lw r4, 176(r0)
-lw r3, 177(r0)
-sub r2, r4, r1
-bez r2, 8
-sw r1, 252(r0)
-bez r0, -8
-add r1, r1, r3
-sll r0, r0, r0
-bez r0, -2
-"""
