@@ -4,7 +4,8 @@ from instr import Instruction
 class NoArgument(Instruction):
     op_codes = {
         "TRX": "000000",
-        "TRY": "000001"
+        "TRY": "000001",
+        "NOP": "111111"
     }
 
     def __init__(self, arg_list):
