@@ -94,10 +94,10 @@ task PC5;
     STACK_POP = 1'd1;
     w = 1'd1;
     #5
-    if (out == 16'b1000011110101100) 
+    if (out == 16'b1000011110101101) 
       $write("Test 5 passed\n");
     else
-      $write("Test 5 error: expected %b actual %b\n",16'b1000011110101100,out);  
+      $write("Test 5 error: expected %b actual %b\n",16'b1000011110101101,out);  
     #10 clk = 1'd1;
   end
 endtask
@@ -111,10 +111,10 @@ task PC6;
     STACK_POP = 1'd0;
     w = 1'd1;
     #5
-    if (out == 16'b1000011110101101) 
+    if (out == 16'b1000011110101110) 
       $write("Test 6 passed\n");
     else
-      $write("Test 6 error: expected %b actual %b\n",16'b1000011110101101,out);  
+      $write("Test 6 error: expected %b actual %b\n",16'b1000011110101110,out);  
     #10 clk = 1'd1;
   end
 endtask
