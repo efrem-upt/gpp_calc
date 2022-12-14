@@ -80,7 +80,7 @@ def saveFileAs():
         asmfile.write(asmdata)
         asmfile.close()
         filemenu.entryconfig(filemenu.index("Save"), state=NORMAL)
-        frame.title("muCPU Assembler [" + filename + "]")
+        frame.title("myCPU Assembler [" + filename + "]")
         frame.focus()
 
 
@@ -96,6 +96,7 @@ def get_instruction_list(asm):
     for i in range(len(asm_split)):
         if asm_split[i] != "":
             args.append(asm_split[i])
+    print(args)
     if args[0] not in NoArgument.op_codes and args[0] not in OneArgument.op_codes and args[
         0] not in TwoArguments.op_codes and args[0] not in StackInstruction.op_codes and args[0] not in ['RET', 'JMP']:
         OneArgument.labels[args[0]] = label
@@ -140,7 +141,7 @@ frame = Toplevel()
 
 scrollbar = Scrollbar(frame)
 scrollbar.pack(side=RIGHT, fill=Y)
-frame.title("muCPU Assembler [" + filename + "]")
+frame.title("myCPU Assembler [" + filename + "]")
 textArea = Text(frame, height=30, width=100, padx=3, pady=3, yscrollcommand=scrollbar.set)
 textArea.pack(side=RIGHT)
 scrollbar.config(command=textArea.yview)
