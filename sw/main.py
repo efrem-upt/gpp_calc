@@ -90,7 +90,7 @@ def exitApp():
 
 
 def get_instruction_list(asm):
-    asm_split = re.split(" |, |\(|\)|:", asm)
+    asm_split = re.split(" |, |\(|\)|:|\t", asm)
     args = []
     global label
     for i in range(len(asm_split)):
