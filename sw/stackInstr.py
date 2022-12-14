@@ -1,5 +1,6 @@
 from instr import Instruction
 
+
 class StackInstruction(Instruction):
     op_codes = {
         "PSH": "000100",
