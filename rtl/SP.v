@@ -10,10 +10,7 @@ module SP(
    else if (dec) begin
         out <= out - 16'd1;
    end 
-  end
-  
-  always @(*) begin
-    if (clk && inc && out < 16'b0000000111111111) begin
+ else if (inc && out < 16'b0000000111111111) begin
         out <= out + 16'd1;  
    end
   end
