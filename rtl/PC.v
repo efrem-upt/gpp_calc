@@ -9,7 +9,8 @@ always @(negedge clk, negedge rst) begin
     out <= 16'd0;
   end
   else if (w && STACK_POP) begin
-    out <= in + 16'd1;
+    #1
+    out <= in + 16'd2;
   end
   else if (w && BRA) begin
     out <= in;
