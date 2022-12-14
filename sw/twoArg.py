@@ -1,6 +1,18 @@
 from instr import Instruction
 
 
+def twos_complement(val, nbits):
+    """Compute the 2's complement of int value val"""
+    if val < 0:
+        val = (1 << nbits) + val
+    else:
+        if (val & (1 << (nbits - 1))) != 0:
+            # If sign bit is set.
+            # compute negative value.
+            val = val - (1 << nbits)
+    return val
+
+
 class TwoArguments(Instruction):
     op_codes = {
         "LDR": "000010",
@@ -21,7 +33,7 @@ class TwoArguments(Instruction):
     def __init__(self, arg_list):
         super().__init__(arg_list[0])
         self.arg1 = arg_list[1]
-        self.arg2 = int(arg_list[2])
+        self.arg2 = twos_complement(int(arg_list[2]), 9)
 
     def assemble(self):
         result = TwoArguments.op_codes[self.instruction]
