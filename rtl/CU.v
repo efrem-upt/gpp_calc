@@ -244,6 +244,32 @@ else if (opcode < 6'b000110) begin
             PC_select <= 1'd0;
  
           end
+        else if (opcode == 6'b010101 || opcode == 6'b010110) begin
+            ALU <=  1'd1;
+            BRA <= 1'd0;
+            COND_BRA <= 1'd0;
+            COND_BRA_REQUIRES_ZERO <= 1'd0;
+            COND_BRA_REQUIRES_NEGATIVE <= 1'd0;
+            COND_BRA_REQUIRES_CARRY <= 1'd0;
+            COND_BRA_REQUIRES_OVERFLOW <= 1'd0;
+            STACK_PSH <= 1'd0;
+            STACK_POP <= 1'd0;
+            L <= 1'd0;
+            S <= 1'd0;
+            TR <= 1'd0;
+            MOV <= 1'd0;
+            flag_select <= 1'd1;
+            ACC_select <= 1'd0;
+            if (RA == 1'b0) begin
+                  X_select <= 1'b1;
+                  Y_select <= 1'b0;  
+              end
+            else if (RA == 1'b1) begin
+                X_select <= 1'b0;
+                Y_select <= 1'b1; 
+            end
+            PC_select <= 1'd0;
+        end
  
           else begin
  

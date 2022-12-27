@@ -9,7 +9,7 @@ always @(negedge rst) begin
       ZERO <= 1'd0;
       NEGATIVE <= 1'd0;
       CARRY <= 1'd0;
-      OVERFLOW <= 1'd0;
+      OVERFLOW <= 1'd0;   
    end
 end
 

@@ -4,7 +4,7 @@ module SE9x16(
 );
 
 always @(*) begin
-  out <= { {7{in[8]}}, in[8:0] };
+  out <= { {7{in[7]}}, in[8:0] };
 end
 
 endmodule

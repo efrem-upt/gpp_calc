@@ -13,7 +13,7 @@ always @(*) begin
   else if (MOV)
     in <= in_MOV;
   else if (L)
-    in <= in_DM;
+    in <= in_DM; 
   else if (TR)
     in <= in_ACC_TRANSFER;
 end

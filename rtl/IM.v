@@ -13,7 +13,9 @@ always @(negedge rst) begin
 end
 
 always @(*) begin
-    out <= rom[addr];
+	 if (rst) begin
+		out <= rom[addr];
+	 end
 end
 
 endmodule

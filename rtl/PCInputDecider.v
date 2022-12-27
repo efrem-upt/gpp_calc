@@ -7,7 +7,7 @@ module PCInputDecider(
 
 always @(*) begin
     if (STACK_POP) begin
-      PC_in <= POP_input;
+      PC_in <= POP_input; 
     end
     else if (BRA) begin
       PC_in <= BRA_input;
