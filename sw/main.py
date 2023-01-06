@@ -96,7 +96,6 @@ def get_instruction_list(asm):
     for i in range(len(asm_split)):
         if asm_split[i] != "":
             args.append(asm_split[i])
-    print(args)
     if args[0] not in NoArgument.op_codes and args[0] not in OneArgument.op_codes and args[
         0] not in TwoArguments.op_codes and args[0] not in StackInstruction.op_codes and args[0] not in ['RET', 'JMP']:
         OneArgument.labels[args[0]] = label
