@@ -27,7 +27,14 @@ class TwoArguments(Instruction):
         "CMP": "010100",
         "INC": "010101",
         "DEC": "010110",
-        "MOV": "010111"
+        "MOV": "010111",
+        "AND": "010111",
+        "OR": "011000",
+        "XOR": "011001",
+        "NOT": "011010",
+        "RSR": "011011",
+        "RSL": "011100",
+        "FCT": "011101"
     }
 
     def __init__(self, arg_list):
