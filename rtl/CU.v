@@ -3,7 +3,9 @@ module CU(
   input RA, clk, rst,
   input [1:0] RA_stack,
   input [8:0] Immediate,
-  output reg ALU, BRA, COND_BRA, COND_BRA_REQUIRES_ZERO, COND_BRA_REQUIRES_NEGATIVE, COND_BRA_REQUIRES_CARRY, COND_BRA_REQUIRES_OVERFLOW, L, S, TR, STACK_PSH,STACK_POP, MOV, flag_select, ACC_select, X_select, Y_select,PC_select
+  input FACT_END,
+  output reg ALU, BRA, COND_BRA, COND_BRA_REQUIRES_ZERO, COND_BRA_REQUIRES_NEGATIVE, COND_BRA_REQUIRES_CARRY, COND_BRA_REQUIRES_OVERFLOW, L, S, TR, STACK_PSH,STACK_POP, MOV, flag_select, ACC_select, X_select, Y_select,PC_select,
+  output reg FACT
 );
 
 always @(negedge rst) begin
@@ -26,6 +28,7 @@ always @(negedge rst) begin
       X_select <= 1'd0;
       Y_select <= 1'd0;
       PC_select <= 1'd0;
+      FACT <= 1'd0;
     end
 end
 
@@ -56,6 +59,7 @@ always @(*) begin
               Y_select <= 1'd1;
            end
            PC_select <= 1'd0;
+           FACT <= 1'd0;
         end
         else if (opcode < 6'b000011) begin
             L <= 1'd1;
@@ -82,6 +86,7 @@ always @(*) begin
               Y_select <= 1'd1;
            end
            PC_select <= 1'd0;
+           FACT <= 1'd0;
         end
         else  if (opcode < 6'b000100) begin
             S <= 1'd1;
@@ -108,6 +113,7 @@ always @(*) begin
               Y_select <= 1'd1;
            end
            PC_select <= 1'd0;
+           FACT <= 1'd0;
        
 end
        
@@ -135,6 +141,7 @@ else if (opcode < 6'b000110) begin
             TR <= 1'd0;
             MOV <= 1'd0;
             flag_select <= 1'd0;
+            FACT <= 1'd0;
              if (RA_stack == 2'd0) begin
                X_select <= 1'd1;
                Y_select <= 1'd0;
@@ -170,6 +177,7 @@ else if (opcode < 6'b000110) begin
      
   else if (opcode  <  6'b001101) begin
             BRA <=  1'd1;
+            FACT <= 1'd0;
             if (opcode == 6'b000110) begin
                 COND_BRA <= 1'd1;
                 COND_BRA_REQUIRES_ZERO <= 1'd1;
@@ -220,10 +228,10 @@ else if (opcode < 6'b000110) begin
    
     end 
    
-    else if  (opcode < 6'b010111) begin
+    else if  (opcode < 6'b011110) begin
    
-        if  (opcode == 6'b010100) begin
-
+        if  (opcode == 6'b010100) begin // CMP
+    
             ALU <=  1'd1;
             BRA <= 1'd0;
             COND_BRA <= 1'd0;
@@ -242,9 +250,9 @@ else if (opcode < 6'b000110) begin
             X_select <= 1'd0;
             Y_select <= 1'd0;
             PC_select <= 1'd0;
- 
+            FACT <= 1'd0;
           end
-        else if (opcode == 6'b010101 || opcode == 6'b010110) begin
+        else if (opcode == 6'b010101 || opcode == 6'b010110) begin // INC si DEC
             ALU <=  1'd1;
             BRA <= 1'd0;
             COND_BRA <= 1'd0;
@@ -269,8 +277,72 @@ else if (opcode < 6'b000110) begin
                 Y_select <= 1'b1; 
             end
             PC_select <= 1'd0;
+            FACT <= 1'd0;
         end
- 
+      else if (opcode == 6'b011101) begin // Factorial
+            if (FACT == 1'd1) begin
+              if (FACT_END == 1'd1) begin
+                 FACT = 1'd0;  
+                  if (RA == 1'd0) begin
+                    X_select <= 1'd1;
+                    Y_select <= 1'd0;
+                  end
+                  else begin
+                    X_select <= 1'd0;
+                    Y_select <= 1'd1;
+                  end
+              end
+            end
+            else begin
+            ALU <=  1'd1;
+            BRA <= 1'd0;
+            COND_BRA <= 1'd0;
+            COND_BRA_REQUIRES_ZERO <= 1'd0;
+            COND_BRA_REQUIRES_NEGATIVE <= 1'd0;
+            COND_BRA_REQUIRES_CARRY <= 1'd0;
+            COND_BRA_REQUIRES_OVERFLOW <= 1'd0;
+            STACK_PSH <= 1'd0;
+            STACK_POP <= 1'd0;
+            L <= 1'd0;
+            S <= 1'd0;
+            TR <= 1'd0;
+            MOV <= 1'd0;
+            flag_select <= 1'd1;
+            ACC_select <= 1'd0;
+            X_select <= 1'd0;
+            Y_select <= 1'd0;
+            PC_select <= 1'd0;
+            FACT <= 1'd1;
+          end
+      end
+    else  if  (opcode == 6'b011010) begin // NOT
+    
+            ALU <=  1'd1;
+            BRA <= 1'd0;
+            COND_BRA <= 1'd0;
+            COND_BRA_REQUIRES_ZERO <= 1'd0;
+            COND_BRA_REQUIRES_NEGATIVE <= 1'd0;
+            COND_BRA_REQUIRES_CARRY <= 1'd0;
+            COND_BRA_REQUIRES_OVERFLOW <= 1'd0;
+            STACK_PSH <= 1'd0;
+            STACK_POP <= 1'd0;
+            L <= 1'd0;
+            S <= 1'd0;
+            TR <= 1'd0;
+            MOV <= 1'd0;
+            flag_select <= 1'd1;
+            ACC_select <= 1'd0;
+            if (RA == 1'd0) begin
+                X_select <= 1'd1;
+                Y_select <= 1'd0;
+            end
+            else begin
+                X_select <= 1'd0;
+                Y_select <= 1'd1;
+            end
+            PC_select <= 1'd0;
+            FACT <= 1'd0;
+          end
           else begin
  
             ALU <=  1'd1;
@@ -305,10 +377,12 @@ else if (opcode < 6'b000110) begin
             end
             
             PC_select <= 1'd0;
+            FACT <= 1'd0;
           end
  
       end
-        else if (opcode == 6'b010111) begin
+      
+        else if (opcode == 6'b011110) begin
             ALU <=  1'd0;
             BRA <= 1'd0;
             COND_BRA <= 1'd0;
@@ -333,6 +407,7 @@ else if (opcode < 6'b000110) begin
               Y_select <= 1'd1;
            end
             PC_select <= 1'd0;
+            FACT <= 1'd0;
         end
         else begin
             ALU <=  1'd0;
@@ -348,6 +423,7 @@ else if (opcode < 6'b000110) begin
             X_select <= 1'd0;
             Y_select <= 1'd0;
             PC_select <= 1'd0;
+            FACT <= 1'd0;
         end
     end
 end
