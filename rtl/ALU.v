@@ -600,7 +600,7 @@ always @(*) begin
           else
               flags[2] = 1'd0;
     end
-    6'b010111: begin
+    6'b010111: begin // AND
           if (Immediate == 16'd0) begin
           sign_before_operation = ACC[15];
           value_before_operation = ACC;
@@ -622,7 +622,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -648,9 +648,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0) 
+             if  (res ==  16'd0)
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -658,7 +658,7 @@ always @(*) begin
               flags[2] = 1'd0;
     end
        end
-     6'b011000: begin
+     6'b011000: begin // OR
           if (Immediate == 16'd0) begin
           sign_before_operation = ACC[15];
           value_before_operation = ACC;
@@ -680,7 +680,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -706,9 +706,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0) 
+             if  (res ==  16'd0)
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -716,7 +716,7 @@ always @(*) begin
               flags[2] = 1'd0;
     end
        end
-      6'b011001: begin
+      6'b011001: begin // XOR
           if (Immediate == 16'd0) begin
           sign_before_operation = ACC[15];
           value_before_operation = ACC;
@@ -738,7 +738,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -764,9 +764,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0) 
+             if  (res ==  16'd0)
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -774,7 +774,7 @@ always @(*) begin
               flags[2] = 1'd0;
     end
        end
-      6'b011010: begin
+      6'b011010: begin // NOT
           if (RA == 1'd0) begin
             res = ~X;
          end
@@ -783,16 +783,16 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0) 
+             if  (res ==  16'd0)
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
           else
               flags[2] = 1'd0;
        end
-     6'b011011: begin
+     6'b011011: begin // Rotate right
           if (Immediate == 16'd0) begin
           sign_before_operation = ACC[15];
           value_before_operation = ACC;
@@ -804,10 +804,10 @@ always @(*) begin
               res = ACC;
               rotate_cnt = X;
               while (rotate_cnt > 0) begin
-                res = {res[0], res[15:1]}; 
+                res = {res[0], res[15:1]};
                 rotate_cnt = rotate_cnt - 16'd1;
- 
-           
+
+
   end
          end
           else begin
@@ -820,15 +820,15 @@ always @(*) begin
             while (rotate_cnt > 0) begin
               res = {res[0], res[15:1]};
               rotate_cnt = rotate_cnt - 16'd1;
-  
-         
+
+
   end
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -846,9 +846,9 @@ always @(*) begin
             res = X;
             rotate_cnt = Immediate;
             while (rotate_cnt > 0) begin
-              res = {res[0], res[15:1]};  
+              res = {res[0], res[15:1]};
               rotate_cnt = rotate_cnt - 16'd1;
-         
+
   end
          end
           else begin
@@ -861,15 +861,15 @@ always @(*) begin
             while (rotate_cnt > 0) begin
               res = {res[0], res[15:1]};
               rotate_cnt = rotate_cnt - 16'd1;
-  
-         
+
+
   end
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0) 
+             if  (res ==  16'd0)
               flags[3] = 1'd1;
-          else 
+          else
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -877,7 +877,7 @@ always @(*) begin
               flags[2] = 1'd0;
     end
        end
-     6'b011100: begin
+     6'b011100: begin // Rotate left
           if (Immediate == 16'd0) begin
           sign_before_operation = ACC[15];
           value_before_operation = ACC;

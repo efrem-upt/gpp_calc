@@ -1,6 +1,6 @@
 module PC(
   input [15:0] in,
-  input clk,rst,w,BRA,STACK_POP,
+  input clk,rst,w,BRA,STACK_POP,FACT,
   output reg [15:0] out
 );
 
@@ -15,7 +15,7 @@ always @(negedge clk, negedge rst) begin
   else if (w && BRA) begin
     out <= in;
   end
-  else begin
+  else if (~FACT) begin
     out <= out + 16'd1;
   end
 end
