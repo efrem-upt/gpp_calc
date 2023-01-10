@@ -40,6 +40,8 @@ class TwoArguments(Instruction):
     def __init__(self, arg_list):
         super().__init__(arg_list[0])
         self.arg1 = arg_list[1]
+        if int(arg_list[2]) > 255 or int(arg_list[2]) < -256:
+            raise Exception("Arguments must be [-256, 255]")
         self.arg2 = twos_complement(int(arg_list[2]), 9)
 
     def assemble(self):
