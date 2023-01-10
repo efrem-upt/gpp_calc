@@ -23,3 +23,9 @@ Design and implementation of a 16 bit GPP along with ASIP for a pocket calculato
 <p align="center">
   <img src="doc/ControlUnit.png">
 </p>
+
+### Factorial Module
+
+<p align="center">
+  <img src="doc/FactorialModule.png">
+</p>
