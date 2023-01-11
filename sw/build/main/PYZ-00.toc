@@ -1,6 +1,6 @@
 ('C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
  'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
- '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\build\\main\\PYZ-00.pyz',
+ '1\\FIC\\Lab\\gpp_calc\\sw\\build\\main\\PYZ-00.pyz',
  [('os',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\os.py',
    'PYMODULE'),
@@ -52,12 +52,6 @@
   ('importlib',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\importlib\\__init__.py',
    'PYMODULE'),
-  ('importlib.abc',
-   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\importlib\\abc.py',
-   'PYMODULE'),
-  ('typing',
-   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\typing.py',
-   'PYMODULE'),
   ('importlib._bootstrap',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\importlib\\_bootstrap.py',
    'PYMODULE'),
@@ -66,6 +60,12 @@
    'PYMODULE'),
   ('importlib.metadata',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\importlib\\metadata.py',
+   'PYMODULE'),
+  ('importlib.abc',
+   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\importlib\\abc.py',
+   'PYMODULE'),
+  ('typing',
+   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\typing.py',
    'PYMODULE'),
   ('configparser',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\configparser.py',
@@ -247,11 +247,11 @@
   ('tracemalloc',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\tracemalloc.py',
    'PYMODULE'),
-  ('stringprep',
-   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\stringprep.py',
-   'PYMODULE'),
   ('_py_abc',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\_py_abc.py',
+   'PYMODULE'),
+  ('stringprep',
+   'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\stringprep.py',
    'PYMODULE'),
   ('token',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\token.py',
@@ -259,32 +259,32 @@
   ('oneArg',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\oneArg.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\oneArg.py',
    'PYMODULE'),
   ('instr',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\instr.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\instr.py',
    'PYMODULE'),
   ('stackInstr',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\stackInstr.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\stackInstr.py',
    'PYMODULE'),
   ('twoArg',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\twoArg.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\twoArg.py',
    'PYMODULE'),
   ('arithmOneArg',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\arithmOneArg.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\arithmOneArg.py',
    'PYMODULE'),
   ('noArg',
    'C:\\Users\\sebig\\OneDrive - Universitatea Politehnica '
    'Timisoara\\Desktop\\UPT - CTI\\An 3\\Sem '
-   '1\\FIC\\Lab\\Asamblor\\gpp_calc\\sw\\noArg.py',
+   '1\\FIC\\Lab\\gpp_calc\\sw\\noArg.py',
    'PYMODULE'),
   ('tkinter.filedialog',
    'c:\\users\\sebig\\appdata\\local\\programs\\python\\python39\\lib\\tkinter\\filedialog.py',
