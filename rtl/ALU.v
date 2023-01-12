@@ -1,8 +1,9 @@
 module ALU(
-  input [15:0] ACC,X,Y,Immediate,fact_reg,fact_val,
+  input signed [15:0] ACC,X,Y,Immediate,
+  input [15:0] fact_reg,fact_val,
   input [5:0] opcode,
   input en,clk,rst,RA,
-  output reg [15:0] res,
+  output reg signed [15:0] res,
   output reg [3:0] flags);
   
   reg [15:0] value_before_operation;
@@ -355,14 +356,20 @@ always @(*) begin
               same_sign = 1'd1;
             else
               same_sign = 1'd0;
-            res = ACC / X;
+            if (X == 16'd0)
+              res = ACC;
+            else
+              res = ACC / X;
          end
           else begin
             if (ACC[15] == Y[15])
               same_sign = 1'd1;
           else
               same_sign = 1'd0;
-            res = ACC / Y;
+            if (Y == 16'd0)
+              res = ACC;
+            else
+              res = ACC / Y;
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
@@ -383,14 +390,20 @@ always @(*) begin
               same_sign = 1'd1;
             else
               same_sign = 1'd0;
-            res = X / Immediate;
+            if (Immediate == 16'd0)
+              res = X;
+            else
+             res = X / Immediate;
          end
           else begin
             if (Immediate[15] == Y[15])
               same_sign = 1'd1;
           else
               same_sign = 1'd0;
-            res = Y / Immediate;
+            if (Immediate == 16'd0)
+              res = Y;
+            else
+             res = Y / Immediate;
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
@@ -413,14 +426,20 @@ always @(*) begin
               same_sign = 1'd1;
             else
               same_sign = 1'd0;
-            res = ACC % X;
+            if (X == 16'd0)
+              res = ACC;
+            else
+              res = ACC % X;
          end
           else begin
             if (ACC[15] == Y[15])
               same_sign = 1'd1;
           else
               same_sign = 1'd0;
-            res = ACC % Y;
+            if (Y == 16'd0)
+              res = ACC;
+            else
+              res = ACC % Y;
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
@@ -441,14 +460,20 @@ always @(*) begin
               same_sign = 1'd1;
             else
               same_sign = 1'd0;
-            res = X % Immediate;
+            if (Immediate == 16'd0)
+              res = X;
+            else
+              res = X % Immediate;
          end
           else begin
             if (Immediate[15] == Y[15])
               same_sign = 1'd1;
           else
               same_sign = 1'd0;
-            res = Y % Immediate;
+            if (Immediate == 16'd0)
+              res = Y;
+            else
+              res = Y % Immediate;
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
@@ -622,7 +647,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -648,9 +673,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0)
+             if  (res ==  16'd0) 
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -680,7 +705,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -706,9 +731,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0)
+             if  (res ==  16'd0) 
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -738,7 +763,7 @@ always @(*) begin
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -764,9 +789,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0)
+             if  (res ==  16'd0) 
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -783,9 +808,9 @@ always @(*) begin
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0)
+             if  (res ==  16'd0) 
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;
@@ -804,10 +829,10 @@ always @(*) begin
               res = ACC;
               rotate_cnt = X;
               while (rotate_cnt > 0) begin
-                res = {res[0], res[15:1]};
+                res = {res[0], res[15:1]}; 
                 rotate_cnt = rotate_cnt - 16'd1;
-
-
+ 
+           
   end
          end
           else begin
@@ -820,15 +845,15 @@ always @(*) begin
             while (rotate_cnt > 0) begin
               res = {res[0], res[15:1]};
               rotate_cnt = rotate_cnt - 16'd1;
-
-
+  
+         
   end
           end
             flags[0] = 1'd0;
             flags[1] = 1'd0;
             if  (res ==  16'd0) //  zero
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1) /* negative */
               flags[2] = 1'd1;
@@ -846,9 +871,9 @@ always @(*) begin
             res = X;
             rotate_cnt = Immediate;
             while (rotate_cnt > 0) begin
-              res = {res[0], res[15:1]};
+              res = {res[0], res[15:1]};  
               rotate_cnt = rotate_cnt - 16'd1;
-
+         
   end
          end
           else begin
@@ -861,15 +886,15 @@ always @(*) begin
             while (rotate_cnt > 0) begin
               res = {res[0], res[15:1]};
               rotate_cnt = rotate_cnt - 16'd1;
-
-
+  
+         
   end
           end
              flags[0] = 1'd0;
              flags[1] = 1'd0;
-             if  (res ==  16'd0)
+             if  (res ==  16'd0) 
               flags[3] = 1'd1;
-          else
+          else 
               flags[3] = 1'd0;
             if (res[15] == 1'd1)
               flags[2] = 1'd1;

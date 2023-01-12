@@ -15,7 +15,7 @@ always @(*) begin
   else if (L)
     in <= in_DM; 
   else if (TR)
-    in <= in_ACC_TRANSFER;
+    in <= in_ACC_TRANSFER;  
 end
 
 endmodule
