@@ -6,7 +6,7 @@
 
 Design and implementation of a 16 bit GPP along with ASIP for a pocket calculator
 
-## How to run
+## How to simulate in Modelsim
 
 - The files from the rtl folder and the gpp_calc_core_tb.v file from the tb folder are loaded into Modelsim
 - Copy the assembler from the folder sw/dist/Sebi's Assembler.exe to the win32aloem folder of Modelsim (recommended step)
@@ -30,30 +30,33 @@ ADD Y
 SUB X
 END: BRA END
 ```
-This code calculates 5! - 4! and the result is stored in the acumulator.
+This code calculates 5! - 4! and the result is stored in the acumulator. Other examples can be found in the file "tb/Exemple de cod pentru testarea procesorului".
+
+P.S: When writing code using procedures, procedures must be written at the end of the code, not at the beginning (as functions can be written in C)
+Moreover, at the end of each simulation, a "mem.txt" file will be created. This file will present the contents of the data memory.
 
 ## Hardware design
 
 ### Main scheme
 
 <p align="center">
-  <img src="doc/DesignHardware.png">
+  <img src="doc/Scheme Hardware/DesignHardware.png">
 </p>
 
 ### ALU
 
 <p align="center">
-  <img src="doc/ALU.png">
+  <img src="doc/Scheme Hardware/ALU.png">
 </p>
 
 ### Control Unit
 
 <p align="center">
-  <img src="doc/ControlUnit.png">
+  <img src="doc/Scheme Hardware/ControlUnit.png">
 </p>
 
 ### Factorial Module
 
 <p align="center">
-  <img src="doc/FactorialModule.png">
+  <img src="doc/Scheme Hardware/FactorialModule.png">
 </p>
