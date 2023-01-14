@@ -2,9 +2,10 @@ module FACTORIAL_tb;
 reg [8:0] val;
 reg clk, rst, FACT;
 wire [15:0] ALU_mul;
+wire [3:0] ALU_flags;
 wire FACT_END;
 
-ALU ArithmeticLogicUnit(.ACC(16'd0),.X(16'd0),.Y(16'd0),.Immediate(16'd0),.fact_reg(instantaFACTORIAL.fact_out),.fact_val({ {7{1'b0}}, instantaFACTORIAL.current_iteration[8:0] }),.opcode(6'b011101),.en(1'd1),.clk(clk),.rst(rst),.RA(1'd0),.res(ALU_mul));
+ALU ArithmeticLogicUnit(.ACC(16'd0),.X(16'd0),.Y(16'd0),.Immediate(16'd0),.fact_reg(instantaFACTORIAL.fact_out),.fact_val({ {7{1'b0}}, instantaFACTORIAL.current_iteration[8:0] }),.opcode(6'b011101),.en(1'd1),.clk(clk),.rst(rst),.RA(1'd0),.res(ALU_mul), .flags(ALU_flags));
 FACTORIAL instantaFACTORIAL(.val(val), .clk(clk), .rst(rst), .FACT(FACT), .ALU_mul(ALU_mul), .FACT_END(FACT_END));
 
 initial begin
@@ -18,9 +19,12 @@ initial begin
   test_FACT_ITERATION_1;
   test_FACT_ITERATION_2;
   test_FACT_ITERATION_3;
-  test_FACT_ITERATION_4;
-  $stop;
-  $finish;
+  
+test_FACT_ITERATION_4;
+  
+$stop;
+  
+$finish;
 end
 
 task test_FACT_ITERATION_1;
@@ -51,7 +55,8 @@ begin
 end
 endtask
 
-task test_FACT_ITERATION_3;
+
+task test_FACT_ITERATION_3;
 begin
   #10 clk = 1'd1;
   $write(" FACT_ITERATION_3 \t");
@@ -66,7 +71,8 @@ end
 endtask
 
 
-task test_FACT_ITERATION_4;
+
+task test_FACT_ITERATION_4;
 begin
   #10 clk = 1'd1;
   $write(" FACT_ITERATION_4 \t");

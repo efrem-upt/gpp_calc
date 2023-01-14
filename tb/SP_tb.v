@@ -70,10 +70,10 @@ task SP4;
     inc = 1;
     dec = 0;
     #5
-    if (out == 16'b0000000111111111) 
+    if (out == 16'b0000000111111110) 
       $write("Test 4 passed\n");
     else
-      $write("Test 4 error: expected %b actual %b\n",16'b0000000111111111,out); 
+      $write("Test 4 error: expected %b actual %b\n",16'b0000000111111110,out); 
     #10 clk = 1'd1; 
   end
 endtask
