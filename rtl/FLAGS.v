@@ -13,8 +13,8 @@ always @(negedge rst) begin
    end
 end
 
-always @(*) begin
-  if (clk && w) begin
+always @(negedge clk) begin
+  if (w) begin
       ZERO <= in[3];
       NEGATIVE <= in[2];
       CARRY <= in[1];

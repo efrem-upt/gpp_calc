@@ -9,7 +9,7 @@ module IR(
   output reg [1:0] RA_stack
 );
 
-always @(posedge clk, negedge rst) begin
+always @(negedge clk, negedge rst) begin
     if (!rst) begin
       out <= 16'd0;
       RA <= 1'd0;

@@ -9,39 +9,35 @@ module CU(
   output reg FACT
 );
 
-// Define the states
 parameter S_IF = 3'b001,
           S_ID = 3'b010,
           S_EX = 3'b011,
           S_MEM = 3'b100,
           S_WB = 3'b101;
-
-// State register
+          
 reg [2:0] current_state = 3'b001, next_state = S_IF;
 
-// Sequential logic to update the state
+
 always @(negedge clk or negedge rst) begin
     if (!rst) begin
-        current_state <= 3'b001; // Reset to S_IF
+        current_state <= 3'b001; 
     end else begin
         #1
         current_state <= next_state;
     end
 end
 
-// Combinational logic to determine the next state
 always @(*) begin
     case (current_state)
         S_IF: next_state = S_ID;
         S_ID: next_state = S_EX;
-        S_EX: next_state = (FACT == 1'b1) ? S_EX : S_MEM; // Remain in S_EX if FACT is 1
+        S_EX: next_state = (FACT == 1'b1) ? S_EX : S_MEM; 
         S_MEM: next_state = S_WB;
         S_WB: next_state = S_IF;
         default: next_state = S_IF;
     endcase
 end
 
-// Output logic
 always @(current_state) begin
     IF = (current_state == S_IF);
     ID = (current_state == S_ID);
@@ -51,7 +47,8 @@ always @(current_state) begin
 end
 
 always @(posedge FACT_END) begin
-  FACT<= 0;
+  
+FACT<= 0;
 end
 
 
@@ -81,6 +78,7 @@ end
 
 always @(negedge clk) begin
     if (ID)  begin
+      #1
         if (opcode < 6'b000010) begin
             TR <= 1'd1;
             ALU <= 1'd0;
