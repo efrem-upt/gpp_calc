@@ -109,7 +109,7 @@ always @(*) begin
               same_sign = 1'd0;
             res = ACC - Y;
           end
-          if (same_sign == 1'd1 && sign_before_operation != res[15]) /* overflow */
+          if (same_sign == 1'd0 && sign_before_operation != res[15]) /* overflow */
               flags[0] = 1'd1;
         else
               flags[0] = 1'd0; 

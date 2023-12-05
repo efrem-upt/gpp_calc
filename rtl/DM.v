@@ -9,7 +9,7 @@ reg signed [15:0] ram [511:0];
 
 always @(negedge rst) begin
   if (!rst) begin
-    out <= ram[0];   
+    out <= 16'bx;   
  end
 end
 
