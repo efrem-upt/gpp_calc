@@ -1,15 +1,14 @@
 module PC_tb;
 reg [15:0] in;
-reg clk, rst, w, BRA, STACK_POP, FACT;
+reg clk, rst, w, BRA, STACK_POP;
 wire [15:0] out;
 
-PC instantaPC(.in(in), .clk(clk), .rst(rst), .w(w), .BRA(BRA), .STACK_POP(STACK_POP), .FACT(FACT), .out(out));
+PC instantaPC(.in(in), .clk(clk), .rst(rst), .w(w), .BRA(BRA), .STACK_POP(STACK_POP), .out(out));
 
 initial begin
   w = 1'd0;
   BRA = 1'd0;
   STACK_POP = 1'd0;
-  FACT = 1'd0;
   in <= 16'b0110101010110011;
   
   PC1;

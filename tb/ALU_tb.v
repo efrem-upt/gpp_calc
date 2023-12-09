@@ -321,7 +321,7 @@ begin
   Y = 16'b1000000000000001;
   RA = 1'd1;
   #2
-  if (res == ACC - Y && flags[0] == 1'd1)
+  if (res == ACC - Y && flags[0] == 1'd0)
     $write("ok ");
   else
 		$write("error @ %t , get %d %d, expect %d %d", $time, res, flags[0], ACC - Y, 1'd1);

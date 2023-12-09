@@ -65,7 +65,7 @@ endtask
 
 task SP4;
   begin
-    #10 clk = 1'd0;
+    #10 clk = 1'd1;
     rst = 1;
     inc = 1;
     dec = 0;
@@ -74,13 +74,13 @@ task SP4;
       $write("Test 4 passed\n");
     else
       $write("Test 4 error: expected %b actual %b\n",16'b0000000111111110,out); 
-    #10 clk = 1'd1; 
+    #10 clk = 1'd0; 
   end
 endtask
 
 task SP5;
   begin
-    #10 clk = 1'd0;
+    #10 clk = 1'd1;
     rst = 1;
     inc = 1;
     dec = 0;
@@ -89,7 +89,7 @@ task SP5;
       $write("Test 5 passed\n");
     else
       $write("Test 5 error: expected %b actual %b\n",16'b0000000111111111,out);  
-    #10 clk = 1'd1; 
+    #10 clk = 1'd0; 
   end
 endtask
 
